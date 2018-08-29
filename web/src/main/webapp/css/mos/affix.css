@@ -1,0 +1,31 @@
+#myScrollspy ul.nav-tabs{
+    width: 180px;
+    margin-top: 100px;
+}
+#myScrollspy ul.nav-tabs li a, #myScrollspy ul.nav-tabs li a:hover{
+    margin: 0;
+    padding: 7px 0px 7px 0px;
+    font-size: 12px;
+    color: #767676;
+    background: #fff;
+    border: 0px;
+}
+#myScrollspy ul.nav-tabs .nav li a{
+    padding-left: 25px;
+}
+#myScrollspy ul.nav-tabs li.active>a, #myScrollspy ul.nav-tabs li.active>a:hover{
+    font-weight: 500;
+    font-size: 13px;
+    color: #0089cd;
+    border: 0px;
+    cursor:pointer;
+}
+.nav-tabs {
+    border-bottom: 0px;
+}
+.affix-top {
+    width:180px;
+}
+.affix{
+    width:180px;
+}

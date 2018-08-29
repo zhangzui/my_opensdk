@@ -1,0 +1,112 @@
+body {
+    /*background-color: #e6e7ec;*/
+    width:1000px;margin:0 auto;
+}
+.mos-header {
+    background-color: #fff;
+    height: 70px;
+}
+.mos-body {
+    background-color: #fff;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    min-height: 80%;
+    /*火狐兼容*/
+    min-height: 700px !important;
+}
+.mos-body:after {
+　　content:"";
+　　visibility:hidden;
+　　display:block;
+　　clear:both;
+　　height:0px;
+}
+.mos-body-mid {
+    border-left: 1px solid #f5f5f5;
+    padding-left: 40px;
+    padding-top: 20px;
+}
+.mos-body-left {
+    padding: 0px;
+}
+.mos-footer {
+    padding-bottom: 20px;
+}
+* {
+    font-family: "Microsoft Yahei", 微软雅黑, Arial;
+}
+p {
+    letter-spacing: 1px;
+}
+.copyright {
+    text-align: center;
+    opacity: 0.8;
+}
+.table {
+    font-size: 13px;
+}
+.red {
+    color: red;
+}
+.bs-example p {
+    padding: 15px;
+}
+.show {
+    padding: 15px 30px 15px 30px;
+    background-color: rgb(244, 245, 249);
+    font-size: 16px;
+}
+.logo {
+    background: url(../img/redis-white.png) no-repeat;
+    text-indent: -9999px;
+    margin: 12px 0;
+    float: left;
+    width: 120px;
+    height: 40px;
+}
+.monitor-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #222;
+}
+
+.monitor-menu li {
+    float: left;
+}
+.monitor-green  {
+    background-color: green;
+}
+.monitor-red {
+    background-color: red;
+}
+
+.monitor-menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.monitor-menu li a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.monitor-menu li a.active {
+    color: white;
+    background-color: #4CAF50;
+}
+.ulclass{
+    list-style: none;
+    padding: 0;
+}
+footer{
+    background: #eee;
+    text-align: center;
+    padding: 10px;
+    margin-top: 0px;
+    border-top: 1px solid #e5e5e5;
+}

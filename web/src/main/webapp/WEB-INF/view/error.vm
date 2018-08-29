@@ -1,0 +1,17 @@
+<!--container-->
+<div class="w" style="margin-top:40px;">
+    <div class="travel">
+        <div class="travel-con travel-noleft">
+            <div class="fail-box">
+                <div class="sucess-bg"></div>
+                #if($ex && $ex.showMessage)
+                    <h3 class="t-sucess" style="margin-top:40px; font-weight:bold">$!ex.showMessage</h3>
+                #else
+                    <h3 class="t-sucess" style="margin-top:40px; font-weight:bold">系统忙，请稍后再试！</h3>
+                #end
+            </div>
+            <a  class="com-redbtn2"  style="margin:40px auto 0 auto;display:block" href="//go.jd.com">去首页</a>
+        </div>
+    </div>
+</div>
+

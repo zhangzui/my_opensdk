@@ -1,0 +1,506 @@
+<html lang="zh-cn" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>支付收单</title>
+
+    <link rel="stylesheet" href="../css/mos/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/mos/index.css" />
+    <link rel="stylesheet" href="../css/mos/orderDemo.css" />
+    <link rel="stylesheet" href="../css/mos/affix.css" />
+    <link rel="stylesheet" href="../css/mos/sideMenu.css" />
+    <link rel="stylesheet" href="../css/mos/zoom.css" />
+    <link rel="stylesheet" href="../css/mos/md.css" />
+</head>
+
+<body class="main">
+<div class="monitor-menu">
+    <ul>
+        <li><a href="/html/serviceUtils.html">首页</a></li>
+        <li><a href="/html/serviceUtils.html">接口测试</a></li>
+        <li><a href="/html/develoUtils.html">工具</a></li>
+        <li><a href="/html/serviceUtils.html">下载SDK</a></li>
+        <li><a href="/html/serviceUtils.html">密钥生成器</a></li>
+        <li><a href="/html/serviceUtils.html">企业站</a></li>
+        <li><a href="/html/serviceUtils.html">关于</a></li>
+    </ul>
+</div>
+<div class="tab-pane" style="border: 1px solid transparent;">
+    <!-- 左边菜单 -->
+    <div  style="float: left;width: 25%; border: 1px solid transparent;">
+    <div style="margin-top:5px;" id="left">
+        <div class="item">对称加解密API文档</div>
+        <ul class="ulclass">
+            <li><a3 href="">交易收单</a3></li>
+            <li><a href="">支付交易</a></li>
+            <li><a href="">交易查询</a></li>
+        </ul>
+        <div class="item">非对称加解密API文档</div>
+        <ul class="ulclass">
+            <li><a href="">扫码支付</a></li>
+            <li><a href="">支付查询</a></li>
+            <li><a href="">取消订单</a></li>
+            <li><a href="">退款接口</a></li>
+            <li><a href="">退款查询</a></li>
+        </ul>
+        <div class="item">开发工具</div>
+        <ul class="ulclass">
+            <li><a href="">AES工具</a></li>
+            <li><a href="">RSA2工具</a></li>
+            <li><a href="">密钥生成器</a></li>
+        </ul>
+        <div class="item">SDK下载</div>
+        <ul class="ulclass">
+            <li><a href="">AES工具</a></li>
+            <li><a href="">RSA2工具</a></li>
+            <li><a href="">密钥生成器</a></li>
+        </ul>
+        <div style="margin-top:20px;">
+        </div>
+    </div>
+</div>
+<!-- 右边内容 -->
+<div style="float: left;width: 75%;">
+<div class="output_wrapper" id="output_wrapper_id"><h3 id="h"><span>支付收单参数列表</span></h3>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>含义</th>
+<th>类型</th>
+<th>长度</th>
+<th>是否可空</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>merchantNo</td>
+<td>商户号</td>
+<td>string</td>
+<td>18</td>
+<td>否</td>
+<td>由企业站统一分配。</td>
+</tr>
+<tr>
+<td>shopId</td>
+<td>门店号</td>
+<td>string</td>
+<td>100</td>
+<td>是</td>
+<td>商户门店ID</td>
+</tr>
+<tr>
+<td>merchantUserId</td>
+<td>商户的用户号</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>商户侧的用户ID</td>
+</tr>
+<tr>
+<td>finCustomerId</td>
+<td>金融会员ID</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>京东金融的会员ID，某些情况下是必传的(比如钱包等产品)</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>商户订单号</td>
+<td>string</td>
+<td>32</td>
+<td>否</td>
+<td>由商户自动生成的订单唯一标识符。</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>订单业务类型</td>
+<td>string</td>
+<td>32</td>
+<td>否</td>
+<td>订单业务类型，参数见订单类型码表。</td>
+</tr>
+<tr>
+<td>businessSceneId</td>
+<td>业务场景ID</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>业务场景ID，收银台报风控使用</td>
+</tr>
+<tr>
+<td>businessRiskId</td>
+<td>业务风控ID</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>业务风控ID，支付报风控时使用，部分场景(如钱包充提转)下不能为空</td>
+</tr>
+<tr>
+<td>mandatoryCheck</td>
+<td>是否强制加验</td>
+<td>Boolean</td>
+<td>-</td>
+<td>是</td>
+<td>本单是否强制加验，默认否</td>
+</tr>
+<tr>
+<td>orderExpireTime</td>
+<td>订单有效期截止时间</td>
+<td>Date</td>
+<td>-</td>
+<td>是</td>
+<td>订单有效期截止时间</td>
+</tr>
+<tr>
+<td>productType</td>
+<td>订单产品类型</td>
+<td>string</td>
+<td>32</td>
+<td>否</td>
+<td>订单产品类型，参数见产品类型码表。</td>
+</tr>
+<tr>
+<td>transactionAmount</td>
+<td>收单金额</td>
+<td>BigDecimal</td>
+<td>-</td>
+<td>否</td>
+<td>收单金额(用户实际支付金额)。当discount、shippingCost、tax的某一项不为空时，需要满足条件：transactionAmount = subtotal – discount + shippingCost + tax</td>
+</tr>
+<tr>
+<td>subTotal</td>
+<td>商品总价</td>
+<td>BigDecimal</td>
+<td>-</td>
+<td>否</td>
+<td>商品总价(不包含营销等扣减项)。</td>
+</tr>
+<tr>
+<td>discount</td>
+<td>折扣</td>
+<td>BigDecimal</td>
+<td>-</td>
+<td>是</td>
+<td>订单折扣、优惠等总金额</td>
+</tr>
+<tr>
+<td>shippingCost</td>
+<td>运费</td>
+<td>BigDecimal</td>
+<td>-</td>
+<td>是</td>
+<td>订单运费金额</td>
+</tr>
+<tr>
+<td>tax</td>
+<td>税费</td>
+<td>BigDecimal</td>
+<td>-</td>
+<td>是</td>
+<td>订单税费金额</td>
+</tr>
+<tr>
+<td>orderCurrency</td>
+<td>订单币种</td>
+<td>string</td>
+<td>3</td>
+<td>否</td>
+<td>支付币种，ISO标准3位字母。</td>
+</tr>
+<tr>
+<td>orderCountry</td>
+<td>订单国家</td>
+<td>string</td>
+<td>2</td>
+<td>否</td>
+<td>支付订单所属国家，ISO标准2位字母。</td>
+</tr>
+<tr>
+<td>notifyUrl</td>
+<td>异步通知地址</td>
+<td>string</td>
+<td>512</td>
+<td>是</td>
+<td>接收交易结果通知的地址(httppost)</td>
+</tr>
+<tr>
+<td>returnUrl</td>
+<td>同步返回地址</td>
+<td>string</td>
+<td>512</td>
+<td>是</td>
+<td>收银台支付成功后重定向的地址</td>
+</tr>
+<tr>
+<td>orderItems</td>
+<td>商品信息</td>
+<td>List<orderitem></orderitem></td>
+<td>-</td>
+<td>是</td>
+<td>商品详细信息，非强校验，某些业务场景下不能为空，否则可能导致网关支付失败。</td>
+</tr>
+<tr>
+<td>itemSku</td>
+<td>商品SKU</td>
+<td>string</td>
+<td>20</td>
+<td>是</td>
+<td>商品SKU。</td>
+</tr>
+<tr>
+<td>itemCategory</td>
+<td>商品品类</td>
+<td>string</td>
+<td>20</td>
+<td>是</td>
+<td>商品品类。</td>
+</tr>
+<tr>
+<td>itemName</td>
+<td>商品名称</td>
+<td>string</td>
+<td>50</td>
+<td>是</td>
+<td>商品名称。</td>
+</tr>
+<tr>
+<td>itemPrice</td>
+<td>商品单价</td>
+<td>BigDecimal</td>
+<td>-</td>
+<td>否</td>
+<td>商品单价。</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>币种</td>
+<td>string</td>
+<td>3</td>
+<td>否</td>
+<td>商品币种，ISO标准3位字母。</td>
+</tr>
+<tr>
+<td>itemQuantity</td>
+<td>购买商品数</td>
+<td>Integer</td>
+<td>5</td>
+<td>否</td>
+<td>商品数量。</td>
+</tr>
+<tr>
+<td>itemLogo</td>
+<td>商品图标</td>
+<td>string</td>
+<td>-</td>
+<td>是</td>
+<td>商品logo。</td>
+</tr>
+<tr>
+<td>shippingDetail</td>
+<td>货运信息</td>
+<td>ShippingDetail</td>
+<td>-</td>
+<td>是</td>
+<td>货运详细信息，非强校验，某些业务场景下不能为空，否则可能导致网关支付失败。</td>
+</tr>
+<tr>
+<td>shippingFirstName</td>
+<td>收货人名</td>
+<td>string</td>
+<td>64</td>
+<td>否</td>
+<td>-</td>
+</tr>
+<tr>
+<td>shippingLastName</td>
+<td>收货人姓</td>
+<td>string</td>
+<td>64</td>
+<td>否</td>
+<td>-</td>
+</tr>
+<tr>
+<td>shippingPhone</td>
+<td>收货人电话</td>
+<td>string</td>
+<td>21</td>
+<td>是</td>
+<td>电话和邮箱必传其一。</td>
+</tr>
+<tr>
+<td>shippingEmail</td>
+<td>收货人邮箱</td>
+<td>string</td>
+<td>64</td>
+<td>是</td>
+<td>电话和邮箱必传其一。</td>
+</tr>
+<tr>
+<td>shippingCountry</td>
+<td>收货人国家编码</td>
+<td>string</td>
+<td>2</td>
+<td>否</td>
+<td>ISO标准，2位字母。</td>
+</tr>
+<tr>
+<td>shippingCountryName</td>
+<td>收货人国家名称</td>
+<td>string</td>
+<td>127</td>
+<td>是</td>
+<td>-</td>
+</tr>
+<tr>
+<td>shippingState</td>
+<td>收货人州(省)编码</td>
+<td>string</td>
+<td>128</td>
+<td>否</td>
+<td>-</td>
+</tr>
+<tr>
+<td>shippingStateName</td>
+<td>收货认州(省)名称</td>
+<td>string</td>
+<td>128</td>
+<td>是</td>
+<td>-</td>
+</tr>
+<tr>
+<td>shippingCity</td>
+<td>收货人市</td>
+<td>string</td>
+<td>128</td>
+<td>否</td>
+<td>-</td>
+</tr>
+<tr>
+<td>shippingStreet1</td>
+<td>收货人街道</td>
+<td>string</td>
+<td>128</td>
+<td>否</td>
+<td>-</td>
+</tr>
+<tr>
+<td>shippingStreet2</td>
+<td>收货人门牌号</td>
+<td>string</td>
+<td>256</td>
+<td>否</td>
+<td>-</td>
+</tr>
+<tr>
+<td>shippingPostal</td>
+<td>收货人邮编</td>
+<td>string</td>
+<td>16</td>
+<td>否</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-1"><span>响应参数说明</span></h3>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>二级字段</th>
+<th>是否可空</th>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>merchantId</td>
+<td></td>
+<td>N</td>
+<td>商家商户号</td>
+<td>String</td>
+<td>由企业站统一分配。</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td></td>
+<td>N</td>
+<td>商家订单号</td>
+<td>String</td>
+<td>请求时的商户订单号。</td>
+</tr>
+<tr>
+<td>transactionNo</td>
+<td></td>
+<td>N</td>
+<td>交易单号</td>
+<td>String</td>
+<td>由金融生成交易单号唯一标识符。</td>
+</tr>
+<tr>
+<td>cashierPcUrl</td>
+<td></td>
+<td>N</td>
+<td>PC收银台url</td>
+<td>String</td>
+<td>在线支付重定向至PC版收银台的地址，均以https开头。</td>
+</tr>
+<tr>
+<td>cashierH5Url</td>
+<td></td>
+<td>N</td>
+<td>H5收银台url</td>
+<td>String</td>
+<td>在线支付重定向至H5版收银台的地址，均以https开头。</td>
+</tr>
+<tr>
+<td>resultFlag</td>
+<td></td>
+<td>N</td>
+<td>是否成功</td>
+<td>boolean</td>
+<td>表示请求结果，成功为true,反之false</td>
+</tr>
+<tr>
+<td>resultCode</td>
+<td></td>
+<td>N</td>
+<td>处理结果编码</td>
+<td>String</td>
+<td>表示请求结果，如果失败可以取改值</td>
+</tr>
+<tr>
+<td>resultInfo</td>
+<td></td>
+<td>N</td>
+<td>处理结果描述</td>
+<td>String</td>
+<td>响应码文字说明，如果失败可以取改值</td>
+</tr>
+</tbody>
+</table>
+<h4 id="h-2"><span>请求参数明文示例</span></h4>
+<pre><code class="hljs json">{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"discount"</span>:<span class="hljs-number">1000</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"finCustomerId"</span>:<span class="hljs-string">"000001"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"merchantId"</span>:<span class="hljs-string">"000001"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"merchantUserId"</span>:<span class="hljs-string">"000001"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"notifyUrl"</span>:<span class="hljs-string">"http://xxx"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"orderCountry"</span>:<span class="hljs-string">"ZZZ"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"orderCurrency"</span>:<span class="hljs-string">"AAA"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"orderExpireTime"</span>:<span class="hljs-string">"2018-06-25&nbsp;18:28:31"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"orderId"</span>:<span class="hljs-string">"000001"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"orderItemVos"</span>:[<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"currency"</span>:<span class="hljs-string">"AAA"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"itemCategory"</span>:<span class="hljs-string">"sss"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"itemLogo"</span>:<span class="hljs-string">"xxx"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"itemName"</span>:<span class="hljs-string">"zzzz"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"itemPrice"</span>:<span class="hljs-string">"das"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"itemQuantity"</span>:<span class="hljs-number">1</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"itemSku"</span>:<span class="hljs-string">"0000"</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;],<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"orderType"</span>:<span class="hljs-string">"1"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"productType"</span>:<span class="hljs-string">"1"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"returnUrl"</span>:<span class="hljs-string">"http://xxx"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingCost"</span>:<span class="hljs-number">1000</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingDetail"</span>:{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingCity"</span>:<span class="hljs-string">"sasasas"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingCountry"</span>:<span class="hljs-string">"th"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingDistrict"</span>:<span class="hljs-string">"sasa"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingEmail"</span>:<span class="hljs-string">"xxx@jd.com"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingFirstName"</span>:<span class="hljs-string">"asa"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingLastName"</span>:<span class="hljs-string">"sdfd"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingPhone"</span>:<span class="hljs-string">"123456664"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingPostal"</span>:<span class="hljs-string">"dadas"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingState"</span>:<span class="hljs-string">"sa"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"shippingStreet"</span>:<span class="hljs-string">"dasd"</span><br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"subTotal"</span>:<span class="hljs-number">1000</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"tax"</span>:<span class="hljs-number">1000</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"transactionAmount"</span>:<span class="hljs-number">1000</span><br>}<br></code></pre>
+<h3 id="h-3"><span>请求参数密文</span></h3>
+<pre><code class="hljs perl">{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"charset"</span>:<span class="hljs-string">"UTF-8"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"data"</span>:<span class="hljs-string">"FWRVIC2NgPnlo%2Bi1bSDZ7Sgn6YchajIbIniDcriUZAlOhdTbxpUc%2BGWE46q1u%2FtV97Q6L9PQfU60NaOQigodrFDid5LFrZsEA%2FzrMboYPYBCa8V1qTRg%2Bl7SPrEnVnKnZNyM2lCRsC9QZQT4ITT5I2vxuJNnKJ94E%2F1NmpKE%2BJmmzJ3fiG4LY6C1QzGg4c71ZPWQ1Ahb9MyOpwo2KMETNfjFuHKq5O7EA%2F6VelfRT64dYmj7wdEZBL%2Fovqxk39M8%2B6jR5lfdyQVUdXq34lic2NxhZJhRwiyR52%2FAAuPM5b4osKO1VU4VQd5cSLg3DsEgp2Dlez%2Bw2L4SKSvXJahHAt9%2FhJp3m1gHTrHksxPG1et3N5zJqiCq3zQHRpe7OA2KlD2vGLYs8wCZ4MSluwbvuQaodeUr0ZdKBj32Yu1%2FEvejn2vMQCKEho5Jak4%2BmORYaybMaGvbCoTnB7XLl6qxda%2Fzn4W%2FdvsQ6K9eoIOH%2FdnJV9b%2FGAKhy4HG7XlPFl9uF1%2BEwY7FC2yvSRsqhZH41AfNKwRbS1pfZKrwJXBgsztfIQ7n3tO65BEIOuyurZHHcAP73%2Fo9yGoqyMWhBxrIJyMalVzHyhUx7Our%2FQGOC5oUR7fZvaA3%2FgZ5OH%2BecEDMEkd2LsBYAAZMinHtwy5vEaL%2F7ji54wW%2BugRN%2FcNtz1h7Vh%2B1GMXHEIxjStILVkIlI6BElNKnx%2BT19u5Py020Q0vOFZ1QJEisXYfPPfUiW03ysxbxiRmQ%2F%2BBlTacixspok7OuGJ40BSO2PCdN2GKhBaQLy6SjzxPhCgDVpXVL0E38h2xkbVuqaHVUdJ7iWycGf0At76digkhZ0Lcrg8wDmwIvaQ0QYmf0BKCITeyF5WnxkAuzPKIx2zXDtvT6qg%2FD36%2Feuma3A9DqCjkdWHjZQ0FdIXs6slZI3cjnCMYC02S6FoLx9PU27DRwEKZ4CaEfcE%2BlIiHR%2FCeGptJgVh5oIsBUheGmKVspMICBdtykKRaCvMJ%2BS2ePpT7%2Bzp19z3y2"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"merchantCode"</span>:<span class="hljs-string">"000001"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"sign"</span>:<span class="hljs-string">"2931e0df92df4d629147cac56c84fef2368e697c7f6dfd8ecdfaaf448eef2353"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"tradeType"</span>:<span class="hljs-string">"01"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"version"</span>:<span class="hljs-string">"0.0.1"</span><br>}<br></code></pre>
+<h3 id="h-4"><span>返回参数密文</span></h3>
+<pre><code class="hljs perl">{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"charset"</span>:<span class="hljs-string">"UTF-8"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"data"</span>:<span class="hljs-string">"W%2FCJij6Rvh4aQOdYR4JbXotoWRP7yHLcBRSq2S4lLsl6cdM70j1w9Z0tUobf9fKr86nUWyYJ6q32EwK9iAFohXHNkeWmY607TAjj41AEpdN7FyCOoMuF%2FZw%2BhXANosc5%2BG3TxwYkSJZYOXatXTqwulsGhm8DriDc1BaOWOQIomAxMdK%2BEIBhYBKClryLXy5XAvBnI%2FrT7LlOs7w%2FchkhYIFCBpMm%2F4LLUL2MpeWqw58LLY6qIbKlqABVkYudMWrr"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"merchantCode"</span>:<span class="hljs-string">"000001"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"sign"</span>:<span class="hljs-string">"8f5650c899e5f512e83b319f636ded136edab24cc3b7e47644022346fc535753"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"tradeType"</span>:<span class="hljs-string">"01"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"version"</span>:<span class="hljs-string">"0.0.1"</span><br>}<br></code></pre>
+<h3 id="h-5"><span>返回参数明文</span></h3>
+<pre><code class="hljs json">{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"merchantId"</span>:<span class="hljs-string">"000001"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"orderId"</span>:<span class="hljs-string">"000001"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"transactionNo"</span>:<span class="hljs-string">"transactionNo-0001"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"cashierPcUrl"</span>:<span class="hljs-string">"http://xxxx"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"cashierH5Url"</span>:<span class="hljs-string">"http://xxxx"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"resultCode"</span>:<span class="hljs-string">"000000"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"resultInfo"</span>:<span class="hljs-string">"成功"</span><br>}<br></code></pre></div>
+</div>
+</div>
+</body>
+</html>
+<footer style="float: left;width: 100%;">
+    <p>如果您对于内容有任何问题或建议，请反馈给我们</p>
+</footer>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jsonFormat.js"></script>
+<script type="text/javascript" src="/js/json2.js"></script>
+<script type="text/javascript" src="/js/commonUtil.js"></script>
+<script type="text/javascript" src="/js/serviceUtils.js"></script>

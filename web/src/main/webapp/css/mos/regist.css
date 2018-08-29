@@ -1,0 +1,100 @@
+body,div,p,h1,h2,h3,h4,h5,h6,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,table,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/24px tahoma,Helvetica,arial,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,em,i{font-style:normal;}small{font-size:12px;}li{list-style:none;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}input[type="button"],input[type="submit"],input[type="reset"]{cursor:pointer;}a{color:#039;text-decoration:none;}a:visited{color:#039;}a:hover{color:#c00;text-decoration:underline;}.jrj-wrap{width:950px;margin:0 auto;}.jrj-bd0{border:0;}.jrj-mg0{margin:0;}.jrj-tl{text-align:left;}.jrj-tc{text-align:center;}.jrj-tr{text-align:right;}.jrj-red,.red{color:#f00;}.jrj-gre,.green{color:#090;}.jrj-fl{float:left;}.jrj-fr{float:right;}.jrj-f14{font-size:14px;}.font-sun{font-family:"ËÎÌå";}.jrj-clear,.jrj-wrap{zoom:1;}.jrj-clear:after,.jrj-wrap:after{content:".";display:block;height:0;visibility:hidden;clear:both;}.site-nav,.site-nav .jrj-wrap{height:35px;line-height:35px;background:url(http://i0.jrjimg.cn/common/tt.gif) repeat-x 0 -106px;}.site-nav .jrj-logo{float:left;width:52px;height:35px;background:url(http://i0.jrjimg.cn/common/bgcommon.gif) no-repeat;background-position:0 -830px;text-indent:-9999px;}.site-nav-link a{margin-left:13px;color:#333;}.site-nav-link a:hover{color:#c00;}.bottom-site-nav{width:948px;height:28px;margin:0 auto;border:1px solid #fff;border-width:1px 0;background:url(http://i0.jrjimg.cn/common/tt.gif) repeat-x;background-position:0 -141px;}.bottom-site-nav .go-top{float:right;width:61px;height:22px;line-height:24px;margin:3px 8px 0 0;display:inline;text-align:center;color:#000;background:url(http://i0.jrjimg.cn/common/bgcommon.gif) no-repeat;background-position:0 -880px;}.bottom-site-nav .go-top:visited, .bottom-site-nav .go-top:hover{color:#000; text-decoration:none;}.bottom-site-nav div{padding:5px 0 0 10px;line-height:20px;}.bottom-site-nav div a{margin:0 6px;color:#555;}.bottom-site-nav div a:visited{color:#555;}.bottom-site-nav div a:hover{color:#c00;}.footer{color:#000;width:950px;margin:0 auto;border-top:2px solid #999;padding-top:1px;line-height:23px;}.footer a{margin:0 4px;text-decoration:none;color:#000;}.footer a:hover{color:#f00;}.footer address{margin-left:274px;text-align:left;}.footer-nav{border-top:1px solid #999;text-align:center;}.copyright{text-align:center;}.header-focus-all{padding-top:31px;_padding-top:0}
+@charset "gb2312";
+/* CSS Document */
+body{background:#ededed;}
+.header,.header .bn{height:50px;background:#ae092e;}
+.header .bn{width:950px;margin:0 auto;}
+.header .bn dl{float:right;border-left:solid 1px #980524;}
+.header .bn dl dt{height:50px;line-height:50px;padding:0 20px;font-family:"Î¢ÈíÑÅºÚ","ËÎÌå";float:left;font-size:16px;border-right:solid 1px #980524;}
+.header .bn dl dt a,.header .bn dl dt a:visited,.header .bn dl dt a:hover{color:#fff;}
+.header .bn img{display:block;}
+.footer{padding-top:50px;height:70px;border:none;}
+.footer p{text-align:center;font-sizE:12px;color:#d1d1d1;}
+
+.vnone{visibility:hidden}
+.mahd{width:950px;margin:0 auto;padding:40px 0;font-family:"Î¢ÈíÑÅºÚ","ËÎÌå";}
+.mahd b,.mahd span{display:inline-block;vertical-align:middle;}
+.mahd b{font-sizE:17px;}
+.mahd span{height:17px;line-height:17px;margin-left:20px;padding-left:20px;border-left:solid 2px #cf1515;font-weight:normal;color:#999;}
+.main{width:950px;margin:0 auto;}
+.main .login-inner,.table-register-wrap{border:solid 1px #e1e1e1;background:#fff;padding:30px 0 60px;}
+.main .login-inner .login-inner-left,.main .login-inner .login-inner-right{float:left;}
+.login-inner-left{width:400px;border-right:solid 1px #e1e1e1;padding-lefT:156px}
+.login-inner-left .txtbox-wrap{border:solid 1px #e1e1e1;position:relative;width:258px;height:38px;background:#fff;}
+.login-inner-left .txtbox-wrap .ic{background:url(../../images/passport/icinput.jpg) no-repeat;width:40px;height:38px;position:absolute;top:0;left:0}
+.login-inner-left .txtbox-wrap .ic01{background-position:0 0}
+.login-inner-left .txtbox-wrap .ic02{background-position:0 -38px}
+.login-inner-left .txtbox-wrap input.txtbox{height:38px;line-height:38px;border:none;padding-lefT:50px;width:180px;}
+.login-inner-left .txtbox-wrap .cls{color:#999;cursor:pointer;display:inline-block;font-sizE:16px;}
+.login-inner-left .txtbox-yzm img,.login-inner-left .txtbox-yzm input{display:inline-block;vertical-align:middle;}
+.login-inner-left .txtbox-yzm input{width:98px;height:38px;line-height:38px;padding:0 10px;border:solid 1px #e1e1e1;}
+.login-inner-left .txtbox-yzm img{padding-lefT:8px;cursor:pointer;}
+.login-inner-left .sx_btn{line-height:16px;padding-lefT:10px;color:#999;}
+.login-inner-left .sx_btn a,.login-inner-left .sx_btn a:visited,.login-inner-left .sx_btn a:hover{color:#ae092e}
+.login-inner-left .loginauto span,.login-inner-left .loginauto a,.login-inner-left .loginauto input{display:inline-block;vertical-align:middle;}
+.login-inner-left .loginauto a,.login-inner-left .loginauto a:visited,.login-inner-left .loginauto a:hover{color:#ae092e;}
+.login-inner-left tr td{padding-bottom:20px;}
+.login-inner-left tr td .btn-login,.table-register-wrap 
+.btn-next{display:block;width:260px;height:45px;line-height:45px;font-sizE:20px;font-family:"Î¢ÈíÑÅºÚ","ËÎÌå";cursor:pointer;text-align:center;}
+.login-inner-left tr td .passnone{height:38px;width:258px;line-height:38px;border:solid 1px #c06175;background:#f1dddc;text-align:center;font-sizE:15px;color:#ae092e;}
+.main .login-inner .login-inner-right{width:391px;}
+.main .login-inner .login-inner-right .orlink{padding:60px 0 0 60px;width:260px;}
+.main .login-inner .login-inner-right .orlink .btnor{background:url(../../images/passport/btnor.jpg) no-repeat;width:260px;height:45px;line-height:45px;display:block;text-align:center;font-sizE:20px;font-family:"Î¢ÈíÑÅºÚ","ËÎÌå";color:#fff;}
+.main .login-inner .login-inner-right .orlink p{text-align:center;color:#999;padding:10px 0}
+.main .login-inner .login-inner-right .links{padding:15px 0 0 80px;}
+.main .login-inner .login-inner-right .links dl dt{height:30px;line-height:30px;padding-lefT:30px;}
+.main .login-inner .login-inner-right .links dl dt a,.main .login-inner .login-inner-right .links dl dt a:visited,.main .login-inner .login-inner-right .links dl dt a:hover{color:#999;}
+.main .login-inner .login-inner-right .links dl dt.linksina{background:url(../../images/passport/icsina.jpg) no-repeat 0 center}
+.main .login-inner .login-inner-right .links dl dt.linkqq{background:url(http://i0.jrjimg.cn/jrjlogin_main/icqq.jpg) no-repeat 0 center}
+.main .login-inner .login-inner-right .links dl dt.linktx{background:url(../../images/passport/ictx.jpg) no-repeat 0 center}
+.main .login-inner .login-inner-right .links dl dt.linkrr{background:url(http://i0.jrjimg.cn/jrjlogin_main/icrr.jpg) no-repeat 0 center}
+.main .login-inner .login-inner-right .links dl dt.linkweixin{background:url(http://i0.jrjimg.cn/jrjlogin_main/weixin_icon.png) no-repeat 0 center}
+
+
+.table-register-wrap{padding-left:80px;padding-right:80px;}
+.table-register-wrap .submit-wrap{padding-top:20px;border-top:dashed 1px #ccc}
+.table-register-wrap .table-register .field{width:160px;font-sizE:14px;text-align:right;padding-right:10px;font-size:14px;color:#333;line-height:40px;}
+.p90{padding-top:70px;padding-bottom:60px;}
+.p90 .field{padding-lefT:90px;}
+.table-register-wrap .table-register .txtbox-gen{width:238px;height:20px;border:solid 1px #e1e1e1;padding:9px 10px;}
+.table-register-wrap .table-register .txtbox-cur{width:236px;height:36px;line-height:36px;border:solid 2px #f1dddc;padding:0 10px;}
+.table-register-wrap .table-register td{vertical-align:top}
+.table-register-wrap .table-register td .info-msg,.table-register-wrap .table-register td .error-msg,.table-register-wrap .table-register td .error-ok,.table-register-wrap .table-register td .error-ts{display:inline-block;height:40px;line-height:40px;}
+.table-register-wrap .table-register td .info-msg{background:url(../../images/passport/icipoknone.jpg) no-repeat;padding-left:35px;color:#f00;color:#999;}
+.table-register-wrap .table-register td .error-msg{background:url(../../images/passport/icipoknone.jpg) no-repeat 0 -40px;padding-left:35px;color:#f00;}
+.table-register-wrap .table-register td .error-ok{background:url(../../images/passport/icipoknone.jpg) no-repeat 0 -80px;padding-left:35px;color:#76ce13;}
+.table-register-wrap .table-register td{padding-bottom:20px;}
+.table-register-wrap .table-register .qd_tr td{padding-bottom:0}
+.table-register-wrap .table-register .qd_tr td .qdbox{height:20px;padding-left:20px;width:136px;}
+.table-register-wrap .table-register .qd_tr td .qd01{}
+.table-register-wrap .table-register .qd_tr td .qd02{background:url(http://i0.jrjimg.cn/jrjlogin_main/qx.jpg) no-repeat right -20px;}
+.table-register-wrap .table-register .qd_tr td .qd03{background:url(http://i0.jrjimg.cn/jrjlogin_main/qx.jpg) no-repeat right -40px;}
+.table-register-wrap .table-register .btn-code{background:#f1dddc;border:solid 1px #ae092e;display:inline-block;width:101px;margin-left:5px;height:38px;line-height:38px;text-align:center;color:#ae092e;cursor:pointer;font-weight:normal;}
+.table-register-wrap .table-register .btn-code-none{background:#dddddd;border:solid 1px #bbbbbb;display:inline-block;width:101px;margin-left:5px;height:38px;line-height:38px;text-align:center;color:#ae092e;cursor:pointer;font-weight:normal;}
+.titcen{text-align:center;padding-top:15px;}
+.titcen a,.titcen a:visited{color:#ae092e;font-family:"ËÎÌå"}
+.titcen a:hover{font-weight:bold;}
+.steps{width:710px;height:70px;background:url(../../images/passport/zhlc.png) no-repeat;margin:0 auto 50px;}
+.step-1{background-position:0 0;}
+.step-2{background-position:0 -70px;}
+.step-3{background-position:0 -140px;}
+.table-register-wrap .padleft{padding-left:120px;}
+.table-register .bd .middle input,.table-register .bd .middle img,.table-register .bd .middle a,.table-register .bd .middle span{display:inline-block;vertical-align:middle;}
+.table-register .bd .middle span{line-height:16px;padding-left:5px;color:#999;}
+.table-register .bd .middle a,.table-register .bd .middle a:visited,.table-register .bd .middle a:hover{color:#ae092e;}
+.pass_ok{padding-bottom:20px;}
+.pass_ok b{font-family:"Î¢ÈíÑÅºÚ","ËÎÌå";font-sizE:24px;display:block;text-align:center;background:url(../../images/passport/ok_big.png) no-repeat center 20px;padding-top:105px;line-height:normal;}
+.pass_ok p{text-align:center;font-family:"ËÎÌå";padding-top:10px;}
+.pass_ok p a,.pass_ok p a:visited{color:#ae092e;}
+.pass_ok p a:hover{font-weight:bold;}
+.with-margin{padding:0 0 15px 60px;}
+.with-margin .highlight{color:#ae092e;}
+.btn-flat,.btn-flat-gray{background: none repeat scroll 0 0 #c0163a;color: #fff;display: inline-block;font-size: 14px;height: 29px;line-height: 29px;text-align: center;width: 138px;margin:0 10px;}
+{color:#ae092e;}
+.btn-flat,.btn-flat:visited,.btn-flat:hover,.btn-flat-gray:visited,.btn-flat-gray:hover{color:#fff}
+.with-margin span.highlight a,.with-margin span.highlight a:visited{color:#ae092e;}
+.with-margin span.highlight a:hover{font-weight:bold}
+.lh20{line-height:20px!important;}
+.maphbtn{text-align:center;padding:10px 0 0;}
+.maphbtn a,.maphbtn a:visited,.maphbtn a:hover{color:#cc0000;}
+.maphbtn a i{font-family:"ËÎÌå"}

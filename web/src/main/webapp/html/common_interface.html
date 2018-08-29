@@ -1,0 +1,138 @@
+<html lang="zh-cn" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>请求/响应公共参数列表</title>
+
+    <link rel="stylesheet" href="../css/mos/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/mos/index.css" />
+    <link rel="stylesheet" href="../css/mos/orderDemo.css" />
+    <link rel="stylesheet" href="../css/mos/affix.css" />
+    <link rel="stylesheet" href="../css/mos/sideMenu.css" />
+    <link rel="stylesheet" href="../css/mos/zoom.css" />
+    <link rel="stylesheet" href="../css/mos/md.css" />
+</head>
+
+<body class="main">
+<div class="monitor-menu">
+    <ul>
+        <li><a href="/html/serviceUtils.html">首页</a></li>
+        <li><a href="/html/serviceUtils.html">接口测试</a></li>
+        <li><a href="/html/develoUtils.html">工具</a></li>
+        <li><a href="/html/serviceUtils.html">下载SDK</a></li>
+        <li><a href="/html/serviceUtils.html">密钥生成器</a></li>
+        <li><a href="/html/serviceUtils.html">企业站</a></li>
+        <li><a href="/html/serviceUtils.html">关于</a></li>
+    </ul>
+</div>
+<div class="tab-pane" style="border: 1px solid transparent;">
+    <!-- 左边菜单 -->
+    <div  style="float: left;width: 25%; border: 1px solid transparent;">
+    <div style="margin-top:5px;" id="left">
+        <div class="item">对称加解密API文档</div>
+        <ul class="ulclass">
+            <li><a3 href="">交易收单</a3></li>
+            <li><a href="">支付交易</a></li>
+            <li><a href="">交易查询</a></li>
+        </ul>
+        <div class="item">非对称加解密API文档</div>
+        <ul class="ulclass">
+            <li><a href="">扫码支付</a></li>
+            <li><a href="">支付查询</a></li>
+            <li><a href="">取消订单</a></li>
+            <li><a href="">退款接口</a></li>
+            <li><a href="">退款查询</a></li>
+        </ul>
+        <div class="item">开发工具</div>
+        <ul class="ulclass">
+            <li><a href="">AES工具</a></li>
+            <li><a href="">RSA2工具</a></li>
+            <li><a href="">密钥生成器</a></li>
+        </ul>
+        <div class="item">SDK下载</div>
+        <ul class="ulclass">
+            <li><a href="">AES工具</a></li>
+            <li><a href="">RSA2工具</a></li>
+            <li><a href="">密钥生成器</a></li>
+        </ul>
+        <div style="margin-top:20px;">
+        </div>
+    </div>
+</div>
+<!-- 右边内容 -->
+<div style="float: left;width: 75%;">
+    <div class="output_wrapper" id="output_wrapper_id"><h3 id="h"><span>请求/响应公共参数列表</span></h3>
+<p>请求和响应报文格式均为json格式</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>变量名</th>
+<th>类型</th>
+<th>可空</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>version</td>
+<td>版本号</td>
+<td>String</td>
+<td>N</td>
+<td>1.0.0</td>
+</tr>
+<tr>
+<td>charset</td>
+<td>字符编码</td>
+<td>String</td>
+<td>N</td>
+<td>默认UTF-8</td>
+</tr>
+<tr>
+<td>tradeType</td>
+<td>交易类型</td>
+<td>String</td>
+<td></td>
+<td>参考值见附录交易类型编码表（指交易接口功能，收单，查询，退款等）按参数列表组成JSON格式数据，然后使用AES加密。具体参数说明需要看接口参数列表</td>
+</tr>
+<tr>
+<td>data</td>
+<td>加密数据</td>
+<td>String</td>
+<td>N</td>
+<td>AES加密之后的数据</td>
+</tr>
+<tr>
+<td>merchantCode</td>
+<td>商户号</td>
+<td>String</td>
+<td>N</td>
+<td>商家商户号</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>数据签名</td>
+<td>String</td>
+<td>N</td>
+<td>SHA256签名，签名顺序为version+charset+tradetype+data+merchantCode+privateKey+soltKeyN</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-1"><span>请求/响应示例</span></h3>
+<pre><code class="hljs json">{<br><span class="hljs-attr">"version"</span>:<span class="hljs-string">"1.0.0"</span>,<br><span class="hljs-attr">"charset"</span>:<span class="hljs-string">"UTF-8"</span>,<br><span class="hljs-attr">"data"</span>:<span class="hljs-string">"&nbsp;N64mYYKJlowxXcDqdJsLqFz1EP1fxld0jgGVmKkabOFWxOlMNUXwApcJkn3j6NXMB7fOa1Q8TsVsWac5HuPDpbA0H23xFPJT3hEghwZoM9JIxoPVDbUeruH9bWu0s9V5wEbI77O42jv3dIs6yXc84SBRjzJoEawq7xQp7tli0P5tHkzfShJ+Y75zMj4mml4yNMTRJaFAYcGRpQ3LW7dZl36m9X2a/C8bAGZs/L3pi33tEc9/cFgpIt9cR8pLSAhxIvcUOv6ViCG1ShpeXZzovmxA/hloRGGXWXjbU+fbyjJ9aWlKkmUFg5b9pZ9xzOExUnRKrfHtzZg0xNEloUBhwamZp3eA1E5PRMLjn8LrEL5JjkGyCyoi9g4B3W73b37FU7NoYOKONaPNwyaxdcFZtKvgr1e65um6CYZ5jET5P7hDDKV3gXpJM9IHnY9A9rUBo0Kx+Q1Agn6dwx1UeI2wzX/D7mB+sUU/2LA/QTZzQUpnZYAoIUQ7LH/D7mB+sUU/gSyKNt+Ut/Fjp+aKsLzTlMndmxARgsrUf8PuYH6xRT/8E5iifJLJXwrawkW/KcRM9zgxMZgCdSV/w+5gfrFFP4Sj8WNP1q74Ejw0/MtF5MOELSmkHwKkxkyPimY9R8qSncMdVHiNsM154HXhN6O3fg=="</span>,<br><span class="hljs-attr">"sign"</span>:<span class="hljs-string">"9b54c90ecfb26f948606a58cde4198ec"</span>,<br><span class="hljs-attr">"merchantCode"</span>:<span class="hljs-string">"000001"</span>&nbsp;&nbsp;&nbsp;&nbsp;<br>}<br></code></pre></div>
+</div>
+</div>
+<div style="float: none">
+    <footer style="float: left;width: 100%;">
+        <p>如果您对于内容有任何问题或建议，请反馈给我们</p>
+    </footer>
+</div>
+</body>
+</html>
+
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jsonFormat.js"></script>
+<script type="text/javascript" src="/js/json2.js"></script>
+<script type="text/javascript" src="/js/commonUtil.js"></script>
+<script type="text/javascript" src="/js/serviceUtils.js"></script>

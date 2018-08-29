@@ -1,0 +1,140 @@
+<html lang="zh-cn" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>接口测试</title>
+
+    <link rel="stylesheet" href="../css/mos/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/mos/index.css" />
+    <link rel="stylesheet" href="../css/mos/orderDemo.css" />
+    <link rel="stylesheet" href="../css/mos/affix.css" />
+    <link rel="stylesheet" href="../css/mos/sideMenu.css" />
+    <link rel="stylesheet" href="../css/mos/zoom.css" />
+</head>
+
+<body class="main">
+<div class="monitor-menu">
+    <ul>
+        <li><a href="/html/serviceUtils.html">首页</a></li>
+        <li><a href="/html/serviceUtils.html">接口测试</a></li>
+        <li><a href="/html/develoUtils.html">工具</a></li>
+        <li><a href="/html/serviceUtils.html">下载SDK</a></li>
+        <li><a href="/html/serviceUtils.html">密钥生成器</a></li>
+        <li><a href="/html/serviceUtils.html">企业站</a></li>
+        <li><a href="/html/serviceUtils.html">关于</a></li>
+    </ul>
+</div>
+<div class="tab-pane" style="border: 1px solid transparent;">
+    <!-- 左边菜单 -->
+    <div  style="float: left;width: 25%; border: 1px solid transparent;">
+    <div style="margin-top:5px;" id="left">
+        <div class="item">对称加解密API文档</div>
+        <ul class="ulclass">
+            <li><a3 href="">交易收单</a3></li>
+            <li><a href="">支付交易</a></li>
+            <li><a href="">交易查询</a></li>
+        </ul>
+        <div class="item">非对称加解密API文档</div>
+        <ul class="ulclass">
+            <li><a href="">扫码支付</a></li>
+            <li><a href="">支付查询</a></li>
+            <li><a href="">取消订单</a></li>
+            <li><a href="">退款接口</a></li>
+            <li><a href="">退款查询</a></li>
+        </ul>
+        <div class="item">开发工具</div>
+        <ul class="ulclass">
+            <li><a href="">AES工具</a></li>
+            <li><a href="">RSA2工具</a></li>
+            <li><a href="">密钥生成器</a></li>
+        </ul>
+        <div class="item">SDK下载</div>
+        <ul class="ulclass">
+            <li><a href="">AES工具</a></li>
+            <li><a href="">RSA2工具</a></li>
+            <li><a href="">密钥生成器</a></li>
+        </ul>
+        <div style="margin-top:20px;">
+        </div>
+    </div>
+</div>
+<!-- 右边内容 -->
+<div class="panel panel-default" style="float: left;width: 75%;">
+    <div class="page-header"><h4 style="margin-left:5px;">接口测试</h4></div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="post" id="payMentForm" target="_blank" >
+
+                <div class="form-group">
+                    <label class="col-xs-2 control-label" >版本号：</label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="version" value="1.0.0"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label" >charset：</label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="charset" value="UTF-8"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label" >商户号：</label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="merchantCode" value="360087641000000005"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label" >AppId：</label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="appId" value="20180719000000"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label" >交易类型：</label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="tradeType" value="01"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label" >参数明文json：</label>
+                    <div class="col-xs-10">
+                        <textarea id="requestParams" wrap="logical" class="form-control" style="height: 500px;background-color: #f5f5f5;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="text-center">
+                        <select style="float: left;margin-left:250px;width: 150px" id="bizTypeSelect" name="bizTypeSelect" class="form-control">
+                            <option value="order">收单</option>
+                            <option value="pay">支付</option>
+                        </select>
+                        <button id="buildTest" class="btn btn-info" type="BUTTON" actionNum="A0110">生成测试</button>
+                        <button id="utilButton1" class="btn btn-success" type="BUTTON" actionNum="A0110">提交</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label" >响应密文：</label>
+                    <div class="col-xs-10">
+                        <pre id="responseParams1" style="height: 250px;background-color: #f5f5f5;"></pre>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label" >响应明文：</label>
+                    <div class="col-xs-10">
+                        <pre id="responseParams2" style="height: 250px;background-color: #f5f5f5;"></pre>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<footer style="float: left;width: 100%;">
+    <p>如果您对于内容有任何问题或建议，请反馈给我们</p>
+</footer>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jsonFormat.js"></script>
+<script type="text/javascript" src="/js/json2.js"></script>
+<script type="text/javascript" src="/js/commonUtil.js"></script>
+<script type="text/javascript" src="/js/serviceUtils.js"></script>

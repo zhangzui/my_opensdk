@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 扫描@Controller注解 -->
+    <context:component-scan base-package="com.zz.opensdk" />
+
+    <!-- 处理HttpMessageConverter -->
+    <mvc:annotation-driven/>
+
+    <!-- spring aop -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- spring mvc 静态资源访问-->
+    <mvc:resources mapping="/html/**" location="/html/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+
+    <context:property-placeholder location="classpath:properties/auth.properties"/>
+
+    <!-- velocity配置 -->
+    <bean id="velocityConfigurer"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/view/" />
+        <property name="configLocation" value="classpath:velocity.properties" />
+    </bean>
+    <bean id="velocityLayoutViewResolver"
+          class="com.zz.opensdk.web.velocity.VelocityLayoutViewResolver">
+        <property name="cache" value="false" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".vm" />
+        <property name="layoutUrl" value="/layout/defaultLayout.vm" />
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="dateToolAttribute" value="dateTool" />
+        <property name="numberToolAttribute" value="numberTool" />
+        <property name="velocityTools" ref="velocityTools" />
+        <property name="viewClass"
+                  value="com.zz.opensdk.web.velocity.VelocityLayoutView" />
+        <property name="allowRequestOverride" value="true"/>
+    </bean>
+    <bean id = "dateTools" name  = "dateTools"  class="org.apache.velocity.tools.generic.DateTool"/>
+    <bean id = "numberTools" name  = "numberTools"  class="org.apache.velocity.tools.generic.NumberTool"/>
+    <bean name="velocityTools" class="java.util.HashMap">
+        <constructor-arg>
+            <util:map map-class="java.util.HashMap">
+                <entry key="dateTools" value-ref="dateTools"/>
+                <entry key="numberTools" value-ref="numberTools"/>
+            </util:map>
+        </constructor-arg>
+    </bean>
+
+
+</beans>
