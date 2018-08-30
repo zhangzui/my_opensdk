@@ -2,14 +2,10 @@ package com.zz.opensdk.web.controller;
 
 
 import com.alibaba.fastjson.JSON;
-import com.zz.opensdk.sdk.common.config.ApiTypeEnum;
-import com.zz.opensdk.sdk.common.config.ExceptionConstants;
-import com.zz.opensdk.sdk.common.exception.SystemExceptionAdapter;
 import com.zz.opensdk.sdk.domain.OpenAPIEntity;
-import com.zz.opensdk.service.TransactionService;
+import com.zz.opensdk.web.bean.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,42 +18,32 @@ import java.util.Map;
 
 /**
  * @author zhangzuizui
+ * @RequestParam注解：
+ * 用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST；
  *
- * 外部网关服务
+ * @RequestBody注解:
+ * 该注解常用来处理Content-Type: 不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等；
  */
 @Controller
 @RequestMapping("/open_api")
 public class OpenServiceController extends BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpenServiceController.class);
 
-    @Autowired
-    private TransactionService transactionService;
-
-
     @RequestMapping(value = "/gateway")
     @ResponseBody
-    public OpenAPIEntity gateway(@RequestBody OpenAPIEntity openAPIEntity) {
-        return transactionService.transactionService(openAPIEntity);
+    public String gateway(@RequestBody UserInfo userInfo) {
+        return JSON.toJSONString(userInfo);
     }
 
     @RequestMapping(value = "/gateway1")
     @ResponseBody
-    public OpenAPIEntity execute1(OpenAPIEntity openAPIEntity) {
-        return transactionService.transactionService(openAPIEntity);
-    }
-
-    @RequestMapping(value = "/gateway2.json")
-    @ResponseBody
-    public OpenAPIEntity gateway2(HttpServletRequest request) {
-        OpenAPIEntity openAPIEntity = getOpenAPIEntity(request);
-        LOGGER.info("交易类型[{}]统一调用服务开始,请求参数为:{}", ApiTypeEnum.get(openAPIEntity.getApiType()).getName(), JSON.toJSONString(openAPIEntity));
-        return transactionService.transactionService(openAPIEntity);
+    public String gateway1(UserInfo userInfo) {
+        return JSON.toJSONString(userInfo);
     }
 
     @RequestMapping(value = "/gateway3")
     @ResponseBody
     public Object gateway3(String name,String password) {
-
         return "gateway3-result:name="+name+",password="+password;
     }
 
@@ -74,6 +60,7 @@ public class OpenServiceController extends BaseController {
     public Object gateway5(List<String> list) {
         return "gateway4-result:name="+list.get(0)+",password="+list.get(1);
     }
+
     @RequestMapping(value = "/gateway6")
     @ResponseBody
     public Object gateway6(@RequestBody List<String> list) {
@@ -85,10 +72,10 @@ public class OpenServiceController extends BaseController {
      */
     @RequestMapping(value = "/gateway7/{userId}",method=RequestMethod.GET)
     @ResponseBody
-    public Object gateway7(String name,String password,@PathVariable String userId) {
-
-
-        return "gateway3-result:name="+name+",password="+password+",userId="+userId;
+    public Object gateway7(UserInfo userInfo,@PathVariable String userId) {
+        System.out.println("userId="+userId);
+        System.out.println("userInfo="+JSON.toJSONString(userInfo));
+        return "success";
     }
 
     @RequestMapping(value = "/gateway7/{userId}",method=RequestMethod.POST,consumes="application/json", produces="application/json")
@@ -130,81 +117,6 @@ public class OpenServiceController extends BaseController {
     @RequestMapping(value = "/test02", method = RequestMethod.GET, headers="Referer=http://www.ifeng.com/")
     public void test02() {
         System.out.println("test02=");
-    }
-
-
-    private OpenAPIEntity getOpenAPIEntity(HttpServletRequest request) {
-        String version = request.getParameter("version");
-        String appId = request.getParameter("appId");
-        String timestamp = request.getParameter("timestamp");
-        String charset = request.getParameter("charset");
-        String tradeType = request.getParameter("tradeType");
-        String data = request.getParameter("data");
-        String merchantNo = request.getParameter("merchantNo");
-        String sign = request.getParameter("sign");
-        String encryptType = request.getParameter("encryptType");
-        String signType = request.getParameter("signType");
-
-        //构造参数
-        OpenAPIEntity openAPIEntity = new OpenAPIEntity();
-        if (!org.springframework.util.StringUtils.hasText(version)){
-            throw SystemExceptionAdapter.initFrontendExceptionInfo(ExceptionConstants.front_service_000002,"");
-        }else {
-            openAPIEntity.setVersion(version);
-        }
-
-        if (!org.springframework.util.StringUtils.hasText(appId)){
-            throw SystemExceptionAdapter.initFrontendExceptionInfo(ExceptionConstants.front_service_000003,"");
-        }else {
-            openAPIEntity.setAppId(appId);
-        }
-
-        if (!org.springframework.util.StringUtils.hasText(timestamp)){
-            throw SystemExceptionAdapter.initFrontendExceptionInfo(ExceptionConstants.front_service_000004,"");
-        }else {
-            openAPIEntity.setTimestamp(timestamp);
-        }
-
-        if (!org.springframework.util.StringUtils.hasText(charset)){
-            throw SystemExceptionAdapter.initFrontendExceptionInfo(ExceptionConstants.front_service_000005,"");
-        }else {
-            openAPIEntity.setCharset(charset);
-        }
-
-        if (!org.springframework.util.StringUtils.hasText(tradeType)){
-            throw SystemExceptionAdapter.initFrontendExceptionInfo(ExceptionConstants.front_service_000006,"");
-        }else {
-            openAPIEntity.setApiType(tradeType);
-        }
-
-        if (!org.springframework.util.StringUtils.hasText(merchantNo)){
-            throw SystemExceptionAdapter.initFrontendExceptionInfo(ExceptionConstants.front_service_000006,"");
-        }else {
-            openAPIEntity.setMerchantNo(merchantNo);
-        }
-
-        if (!org.springframework.util.StringUtils.hasText(data)){
-            throw SystemExceptionAdapter.initFrontendExceptionInfo(ExceptionConstants.front_service_000006,"");
-        }else {
-            openAPIEntity.setData(data);
-        }
-
-        if (!org.springframework.util.StringUtils.hasText(signType)){
-            throw SystemExceptionAdapter.initFrontendExceptionInfo(ExceptionConstants.front_service_000006,"");
-        }else {
-            openAPIEntity.setSignType(signType);
-        }
-        if (!org.springframework.util.StringUtils.hasText(encryptType)){
-            throw SystemExceptionAdapter.initFrontendExceptionInfo(ExceptionConstants.front_service_000006,"");
-        }else {
-            openAPIEntity.setEncryptType(encryptType);
-        }
-        if (!org.springframework.util.StringUtils.hasText(sign)){
-            throw SystemExceptionAdapter.initFrontendExceptionInfo(ExceptionConstants.front_service_000006,"");
-        }else {
-            openAPIEntity.setSign(sign);
-        }
-        return openAPIEntity;
     }
 
 }
