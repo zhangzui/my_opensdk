@@ -19,79 +19,11 @@ var dateUtil = {
 var nowDateStr = dateUtil.getFromatDate();
 var expiredDateStr = dateUtil.getFromatDate(1);
 var saveOrderReqdemo = {
-    "discount":10,
-    "finCustomerId":"0062002000000116",
-    "merchantNo":"360087641000000005",
-    "merchantUserId":"000001",
-    "notifyUrl":"http://xxx",
-    "orderCountry":"TH",
-    "orderCurrency":"THB",
-    "orderExpireTime":expiredDateStr,
-    "orderId":"order_"+nowDateStr,
-    "orderItemVos":[
-        {
-            "currency":"AAA",
-            "itemCategory":"sss",
-            "itemLogo":"xxx",
-            "itemName":"zzzz",
-            "itemPrice":1000,
-            "itemQuantity":1,
-            "itemSku":"0000"
-        }
-    ],
-    "orderType":"WLT_CHARGE",
-    "productType":"EWALLET",
-    "returnUrl":"http://xxx",
-    "shippingCost":5,
-    "shippingDetail":{
-        "shippingCity":"sasasas",
-        "shippingCountry":"th",
-        "shippingCountryName":"sdfd",
-        "shippingEmail":"xxx@jd.com",
-        "shippingFirstName":"asa",
-        "shippingLastName":"sdfd",
-        "shippingPhone":"123456664",
-        "shippingPostal":"dadas",
-        "shippingState":"sa",
-        "shippingStateName":"sdfd",
-        "shippingStreet1":"dasd",
-        "shippingStreet2":"dasd"
-    },
-    "shopId":"36008764100000000501",
-    "subTotal":1000,
-    "tax":5,
-    "transactionAmount":1000
+    "discount":10
 };
 var payreqdemo = {
-    "acceptHeader":"xxxxx",
-    "billingDetailVo":{
-        "billAreaCode":"00000",
-        "billingCity":"xxxxCity",
-        "billingCountry":"xxxxCountry",
-        "billingCountryName":"xxxxCountryName",
-        "billingEmail":"xxx@jd.com",
-        "billingFirstName":"xxxFirstName",
-        "billingLastName":"xxxLastName",
-        "billingPhone":"18501959595",
-        "billingPostal":"00000",
-        "billingState":"00000",
-        "billingStateName":"xxxxStateName",
-        "billingStreet1":"xxxStreet1",
-        "billingStreet2":"xxxStreet2"
-    },
-    "cardCenterId":"8B5F5E88AFBAAB48A4D0132AD624940E",
-    "clientIp":"127.0.0.1",
-    "deviceType":"H5",
-    "finCustomerId":"0062002000000116",
-    "language":"th_TH",
-    "languageEncoding":"UTF-8",
-    "merchantNo":"360087641000000005",
-    "orderId":"20180706165728",
-    "payAmount":1000,
-    "paymentMethod":"BALA",
-    "transactionNo":"20180706104012070616572818223160",
-    "userAgent":"sasas"
-};
+    "acceptHeader":"xxxxx"
+}
 $(function(){
     $("#requestParams").html("").html(formatJson(JSON.stringify(saveOrderReqdemo)));
 

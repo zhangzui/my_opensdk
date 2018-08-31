@@ -6,16 +6,16 @@ package com.zz.opensdk.web.bean;
  */
 public class UserInfo {
 
-    private String userNo;
+    private String userId;
     private String userName;
     private String userPwd;
 
-    public String getUserNo() {
-        return userNo;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserNo(String userNo) {
-        this.userNo = userNo;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
