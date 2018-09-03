@@ -70,9 +70,7 @@ var params = {
     "name":"zxzz",
     "password":"123456"
 }
-/**
- * List传参： data: JSON.stringify(["123", "456"]),
- */
+
 var service = {
     gateway0 : function(){
         var url = $("#url_gateway0").val();
@@ -87,6 +85,10 @@ var service = {
             }
         });
     },
+    /**
+     * get
+     * http://aaa.com:8080/test/gateway1?userId=000001&userName=zzz&userPwd=123456
+     */
     gateway1: function(){
         var url = $("#url_gateway1").val();
         $.ajax({

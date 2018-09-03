@@ -20,6 +20,10 @@ import java.util.Map;
  * @author zhangzuizui
  * @RequestParam注解：
  * 用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST；
+ * 如果要@RequestParam为一个int型的数据传值，假如前端并未输入，那么将会为int型的数据赋值为null。显然，这是不允许的，直接报错。
+    required=true，则参数必须要传
+    1.public String test(@RequestParam(name="userId",defaultValue="0001") String id){
+    2.@RequestParam(name="lid",required=true)
  *
  * @RequestBody注解:
  * 该注解常用来处理Content-Type: 不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等；
@@ -119,4 +123,19 @@ public class ControllerTest extends BaseController {
         return "gateway10-success";
     }
 
+    /**
+     *  required=true，则参数必须要传,false 可以不传
+     *  默认值 defaultValue = "xxx",
+     *  name或者value设置别名
+     *  https://blog.csdn.net/a350204530/article/details/60763379
+     *  @RequestHeader绑定请求头数据
+     *  @CookieValue绑定Cookie数据值
+     */
+
+    @RequestMapping(value = "/gateway11")
+    @ResponseBody
+    public String gateway11(@RequestParam(value = "userName",defaultValue = "xxx",required = false) String name,String password) {
+        LOGGER.info("name="+name+",password="+password);
+        return "gateway2-result:name="+name+",password="+password;
+    }
 }
