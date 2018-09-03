@@ -10,14 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Aspect
-@Component
-@Order(10000)
+//@Aspect
+//@Component
+//@Order(10000)
 public class BaseAop {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BaseAop.class);
 
-	@Around(value = "execution(* com.zz.opensdk.web.controller.*.*(..))", argNames = "proceedingJoinPoint")
+	//@Around(value = "execution(* com.zz.opensdk.web.controller.*.*(..))", argNames = "proceedingJoinPoint")
 	public Object executeAround(ProceedingJoinPoint proceedingJoinPoint){
 		Object[] args = proceedingJoinPoint.getArgs();
 		MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
