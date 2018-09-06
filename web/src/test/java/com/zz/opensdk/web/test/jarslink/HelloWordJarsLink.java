@@ -43,6 +43,28 @@ public class HelloWordJarsLink {
             moduleLoader.unload(module);
         }
     }
+    @Test
+    public void test1_1() throws InterruptedException {
+        //加载和注册模块
+        Module module = moduleLoader.load(ModuleRefreshSchedulerImpl.buildModuleConfig());
+        moduleManager.register(module);
+        String result = module.doAction("helloWorld", "zzz");
+        System.out.println("result = " + result);
+
+        Thread.sleep(5000);
+        //卸载模块
+        moduleLoader.unload(module);
+
+        //加载和注册模块
+        Module module2 = moduleLoader.load(ModuleRefreshSchedulerImpl.buildModuleConfig2());
+        moduleManager.register(module2);
+        String result2 = module2.doAction("helloWorld", "zzz");
+        System.out.println("result2 = " + result2);
+
+        Thread.sleep(1000);
+        //卸载模块
+        moduleLoader.unload(module);
+    }
 
     @Test
     public void test0() throws InterruptedException {

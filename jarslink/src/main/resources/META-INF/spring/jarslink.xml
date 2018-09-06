@@ -14,6 +14,8 @@
 	<bean id="helloWorldAction" class="com.zz.opensdk.jarslink.action.HelloWorldAction"/>
 
 	<bean id="moduleAction" class="com.zz.opensdk.jarslink.action.ModuleAction"/>
+
+	<bean id="openSdkModuleAction" class="com.zz.opensdk.jarslink.action.OpenSdkModuleAction"/>
 </beans>
 
 

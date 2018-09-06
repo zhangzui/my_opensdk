@@ -65,4 +65,48 @@ public class ModuleRefreshSchedulerImpl extends AbstractModuleRefreshScheduler {
 
         return moduleConfig;
     }
+    public static ModuleConfig buildModuleConfig2() {
+
+        //获取模块的ClassLoader
+       // URL demoModule = Thread.currentThread().getContextClassLoader().getResource("/spring/my_jarslink-1.0.0.jar");
+
+        List<URL> moduleUrl = Lists.newArrayList();
+        try {
+            URL url = new URL("file:/D:/Users/my_opensdk/web/src/test/resources/spring/my_jarslink-1.0.0.jar");
+//            URL url = new URL("file:/D:/User/zhangzuigit/jarslink/jarslink-api/target/test-classes/jarslink-module-demo-1.0.0.jar");
+            moduleUrl.add(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        MyModuleClassLoader2 myModuleClassLoader = new MyModuleClassLoader2(moduleUrl.toArray(new URL[]{}),Thread.currentThread().getContextClassLoader());
+        Thread.currentThread().setContextClassLoader(myModuleClassLoader);
+
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+        URL demoModule = classLoader.getResource("spring/my_jarslink-1.0.0.jar");
+        ModuleConfig moduleConfig = new ModuleConfig();
+
+        String scanBase = "com.zz.opensdk.jarslink.main";
+
+        moduleConfig.addScanPackage(scanBase);
+        moduleConfig.removeScanPackage(scanBase);
+        Map<String, Object> properties = new HashMap();
+        moduleConfig.withEnabled(true).
+                withVersion("1.0.0.20170621").
+                withOverridePackages(ImmutableList.of("com.zz.opensdk.jarslink.action")).
+                withProperties(properties);
+
+        moduleConfig.setOverridePackages(ImmutableList.of("com.zz.opensdk.jarslink.action"));
+        moduleConfig.setName("demo");
+        moduleConfig.setEnabled(true);
+        moduleConfig.setVersion("1.0.0.20170621");
+        properties.put("url", "127.0.0.1");
+        moduleConfig.setProperties(properties);
+        moduleConfig.setModuleUrl(ImmutableList.of(demoModule));
+
+        CachedIntrospectionResults.clearClassLoader(myModuleClassLoader);
+
+        return moduleConfig;
+    }
 }

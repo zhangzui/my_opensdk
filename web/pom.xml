@@ -132,5 +132,10 @@
 			<version>1.6.1.20180301</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.alipay.jarslink</groupId>
+			<artifactId>jarslink-api</artifactId>
+			<version>1.6.1.20180301</version>
+		</dependency>
 	</dependencies>
 </project>

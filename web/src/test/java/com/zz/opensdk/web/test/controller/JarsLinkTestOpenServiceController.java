@@ -1,13 +1,21 @@
 package com.zz.opensdk.web.test.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alipay.jarslink.api.Module;
+import com.alipay.jarslink.api.ModuleConfig;
+import com.alipay.jarslink.api.ModuleLoader;
+import com.alipay.jarslink.api.ModuleManager;
+import com.google.common.collect.ImmutableList;
 import com.zz.opensdk.sdk.common.OpenApiConstants;
 import com.zz.opensdk.sdk.common.OpenApiRuntimeException;
 import com.zz.opensdk.sdk.domain.OpenAPIEntity;
 import com.zz.opensdk.sdk.domain.ResponseBaseVo;
 import com.zz.opensdk.sdk.utils.EncryptUtils;
 import com.zz.opensdk.sdk.utils.OpenApiHelper;
+import com.zz.opensdk.web.aop.AbstractModuleRefreshSchedulerImpl;
+import com.zz.opensdk.web.controller.JarsLinkOpenServiceController;
 import com.zz.opensdk.web.controller.OpenServiceController;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -16,7 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Date;
+import java.net.URL;
+import java.util.*;
 
 /**
  * @author zhangzuizui
@@ -24,13 +33,16 @@ import java.util.Date;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:/spring-config.xml"})
-public class TestOpenServiceController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestOpenServiceController.class);
+public class JarsLinkTestOpenServiceController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JarsLinkTestOpenServiceController.class);
 
     @Autowired
-    private OpenServiceController serviceController;
+    private AbstractModuleRefreshSchedulerImpl abstractModuleRefreshSchedulerImpl;
 
-    //    public static final String PRIVATEKEY = "012345678901234567890123";
+    @Autowired
+    private JarsLinkOpenServiceController serviceController;
+
+//    public static final String PRIVATEKEY = "012345678901234567890123";
     public static final String PRIVATEKEY = "3in3iv837k978qcchv9reneh";
     public static final String CHARSET = "UTF-8";
 
@@ -43,17 +55,42 @@ public class TestOpenServiceController {
     String JDPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtbA2192l97C2sqnfCw3NAI8taezavX86Ec7jK1T33SkVDOuL+ikaRSW+jN2d2usCDZ/rvzrAEjYf5oA68TReGgINeXrS6PAKdGPJvi2jIb24oW92GbAbd794LsWa3DqAM75XkPl7B5Pz1Iw84CRaFXvwjgDRt/LpP0B6WSfkPh7+kgCb8BdGwkEqzP5HUmyM5elAiobayAKYvm06RxY1ZlG6f34Q/9PMr+jDtx8t+iTQlfDPgNeOHz05xFfiudmZh8CcSwAWQ2xepJTY04oO25ii65CbthoJ5Sqie5QlVcUXHgojwW0dVc0thVwIo9fmb9Qiv6ndoefnhZdcWWzn4wIDAQAB";
     String JDPrivateKey = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC1sDbX3aX3sLayqd8LDc0Ajy1p7Nq9fzoRzuMrVPfdKRUM64v6KRpFJb6M3Z3a6wINn+u/OsASNh/mgDrxNF4aAg15etLo8Ap0Y8m+LaMhvbihb3YZsBt3v3guxZrcOoAzvleQ+XsHk/PUjDzgJFoVe/COANG38uk/QHpZJ+Q+Hv6SAJvwF0bCQSrM/kdSbIzl6UCKhtrIApi+bTpHFjVmUbp/fhD/08yv6MO3Hy36JNCV8M+A144fPTnEV+K52ZmHwJxLABZDbF6klNjTig7bmKLrkJu2GgnlKqJ7lCVVxRceCiPBbR1VzS2FXAij1+Zv1CK/qd2h5+eFl1xZbOfjAgMBAAECggEBAJOhb67Px4AP8yQRq87Lk/wUWw5rCwJXUtQNi8E19YGbVCN/cen/Y/0zwjWsDgxIUQ7JF0H3dwJVQG6HW12K87umV1SSXLYx9gzE2LTTWG6ePlvOueP9mRQgXIOExWSVlH5296gxT6rEqafXm891Ok2iu8BnIgGaO7TNq5yuMWPXY7x4GP7Vbek4QAWuIRDTDfqPoSkZPofaQQmttx+7emlRv3PbIpMRwKX/X9qkU3mfmwIuYVxbDbUB+08WYMcTijyhwmrSsbJwnDN8D5NWNlgS6pEu4ML+hiAT+zTzcD+5AeFsynfub7dOKUALjtRr3OktfverPJNaglK1XuIirgECgYEA6r8Q+hi1x95wTWqBTFOaU8aRfkGRwrUkh/6RvvB4BfNHoEXYxHk3mJsjKpL2wPuF4T6EjhYdsAeBlnArVuO0jM9a9vWm52/3yxxiSFlaxAyDa/OTkMgDbkJOTRAOZpVVatU1APiWJYSVEuKNLHWDwQNKN44/GPSek/wT1YElUqMCgYEAxiNfhUWNn5YUn3nrHOHrPwmMWjtLAy91KklLmqftHIYdO15rQM3395Y+KDx2gYDABorueo2k/mq6bM77zPCkJjLFwjGdbN+iu7OdtvVDVx+5f1QDVy89nm5frGPHj7OarmhCeW2rTMiEuvCzwIxsj59emCe77x9vpG3YIMwUqcECgYB7QLq/Nb4sJQS+AQ/GbZb4Kag2rGLF4qo9pVIM+OFr7mJLKqE395VTURFTxzo79VREAblDiSUpSaemv1piEsi3rh/KzwxFNCrcwBhyeEgJ67ANPCTcvcffWn0WRTnqbrocj7l2uw7KwCQteDo7f7Af5YRQSyWiCr5AYPhg/6ADFQKBgF47upVGxBlvJnXGZUSCSgDcCK1tX7qvGnk3DMcMMKANRN/Ugwv6KYHOKde3EeF7m1hBQTR2I0+A8RMIygbpOBiWsyktsaJzJhFBVrQKJ7HK+80L5t7TL+omskfp2KKGl/10xpC70OmewEmsasEbyBHyiOmylBYhDFbWiyDmDrnBAoGAFFZnI1e8a8hN07XE3Xf/ItfFF6wnb2LrLHUmw5/T8gaWiJ0EMIi7ZMBYSIKruAfqnkCJ96lqYQVnoAT1hdpoBpBzYb2eeaBVCNrOSOwXHtJ79ss6DOgpWjS1ynHvvlcUgOt6HIOyQLU5Nd4duHQByeCqVr/4i4AhzPNGWWqGOMQ=";
 
+
+    @Autowired
+    private ModuleManager moduleManager;
+
+    @Autowired
+    private ModuleLoader moduleLoader;
+
+    @Before
+    public void before(){
+//        List<ModuleConfig> moduleConfigs = new ArrayList<>();
+//        moduleConfigs.add(buildModuleConfigZZZ("opensdk",true,"1.0.0"));
+//        abstractModuleRefreshSchedulerImpl.setModuleConfigs(moduleConfigs);
+//        abstractModuleRefreshSchedulerImpl.run();
+
+        //注册版本1
+        ModuleConfig moduleConfig1 = buildModuleConfigZZZ("opensdk",true,"1.0.0");
+        Module module1 = moduleLoader.load(moduleConfig1);
+        moduleManager.register(module1);
+
+        //注册版本2
+        ModuleConfig moduleConfig2 = buildModuleConfigZZZ("opensdk",true,"1.0.1");
+        Module module2 = moduleLoader.load(moduleConfig2);
+        moduleManager.register(module2);
+    }
+
     @Test
     public void testOpenSdk() throws OpenApiRuntimeException {
-        OpenAPIEntity req = buildBizEntity();
-
-        LOGGER.info("请求参数：" + JSON.toJSONString(req));
-
+        OpenAPIEntity req = buildBizEntity("1.0.0");
         OpenAPIEntity res = serviceController.gateway(req);
 
-        LOGGER.info("返回结果："+JSON.toJSONString(res));
+        OpenAPIEntity req2 = buildBizEntity("1.0.1");
+        OpenAPIEntity res2 = serviceController.gateway(req2);
 
         getResponse(res);
+
+        getResponse(res2);
 
     }
 
@@ -72,13 +109,13 @@ public class TestOpenServiceController {
         }
     }
 
-    private OpenAPIEntity buildBizEntity() throws OpenApiRuntimeException {
+    private OpenAPIEntity buildBizEntity(String version) throws OpenApiRuntimeException {
 
         String data = "{\"merchantNo\":\"360087641000000005\",\"storeNo\":\"36008764100000000501\",\"device_info\":\"000001\",\"body\":\"product description\",\"attach\":\"attach message\",\"out_trade_no\":\"merchant_order_id_0001\",\"total_fee\":\"0.1\",\"fee_type\":\"THB\",\"spbill_create_ip\":\"127.0.0.1\",\"time_start\":\"20180713091010\",\"time_expire\":\"20180714091010\",\"auth_code\":\"1231321231231\"}";
 
         OpenAPIEntity openAPIEntity = new OpenAPIEntity();
         openAPIEntity.setMerchantNo("360087641000000252");
-        openAPIEntity.setVersion("1.0.0");
+        openAPIEntity.setVersion(version);
         openAPIEntity.setEncryptType("AES");
         openAPIEntity.setAppId("20180723000014");
         openAPIEntity.setCharset(CHARSET);
@@ -98,4 +135,42 @@ public class TestOpenServiceController {
         return openAPIEntity;
     }
 
+    public static ModuleConfig buildModuleConfigZZZ(String name, boolean enabled, String version) {
+        ModuleConfig moduleConfig = new ModuleConfig();
+        String scanBase = "com.zz.opensdk.jarslink.main";
+        moduleConfig.addScanPackage(scanBase);
+        moduleConfig.removeScanPackage(scanBase);
+        Map<String, Object> properties = new HashMap();
+        moduleConfig.setName(name);
+        moduleConfig.setEnabled(enabled);
+        moduleConfig.setVersion(version);
+        properties.put("url", "127.0.0.1");
+        moduleConfig.setProperties(properties);
+        //开启多个版本
+        moduleConfig.setNeedUnloadOldVersion(false);
+
+        //类加载器
+//        ClassLoader currentClassLoader = Thread.currentThread().getContextClassLoader();
+//        List<URL> moduleUrl = Lists.newArrayList();
+//        List<String> overridePackages = ImmutableList.of("com.zz.opensdk.jarslink.action");
+//        try {
+//            URL url = new URL("file:/D:/User/zhangzuigit/jarslink/jarslink-api/src/test/resources/my_jarslink-1.0.0.jar");
+//            moduleUrl.add(url);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        ModuleClassLoader myModuleClassLoader = new ModuleClassLoader(moduleUrl,Thread.currentThread().getContextClassLoader(),overridePackages);
+//        Thread.currentThread().setContextClassLoader(myModuleClassLoader);
+
+        URL demoModule = Thread.currentThread().getContextClassLoader().getResource("my_jarslink-"+version+".jar");
+
+        //moduleConfig配置信息
+        //moduleConfig.setOverridePackages(ImmutableList.of("com.zz.opensdk.jarslink.action"));
+
+        moduleConfig.setModuleUrl(ImmutableList.of(demoModule));
+
+//        Thread.currentThread().setContextClassLoader(currentClassLoader);
+        return moduleConfig;
+    }
 }

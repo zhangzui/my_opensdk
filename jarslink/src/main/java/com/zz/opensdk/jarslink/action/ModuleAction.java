@@ -22,6 +22,6 @@ public class ModuleAction implements Action<ModuleConfig, ModuleConfig> {
 
     @Override
     public String getActionName() {
-        return "moduleAction";
+        return "oduleAction";
     }
 }

@@ -72,6 +72,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.zz.opensdk.service</groupId>
+            <artifactId>my_opensdk_service</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
 </project>
