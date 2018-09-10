@@ -5,6 +5,9 @@ $(function(){
     $('#gateway0').on('click', function (e) {
         service.gateway0();
     });
+    $('#gateway00').on('click', function (e) {
+        service.gateway00();
+    });
     $('#gateway1').on('click', function (e) {
         service.gateway1();
     });
@@ -54,29 +57,34 @@ var service = {
             type: "POST",
             url: url,
             data:userInfo,
-            //contentType: "application/json;charset=utf-8",
-            dataType : "text",
+            dataType : "JSON",
             success : function(res){
                 console.info(JSON.stringify(res));
-            }
-        });
-    },/*gateway1 : function(){
-        var url = $("#url_gateway0").val();
-        $.ajax({
-            url: url,
-            type: 'POST',
-            dataType: 'jsonp',
-            jsonp: '<span style="color:#ff0000;">callbackparam</span>',
-            jsonpCallback:'jsonpCallback',
-            success: function(json){
-                console.log("请求路径："+jsonpUrl+"返回结果："+json);
-                console.log(json);
             },
-            error: function(){
-                alert('fail');
+            error:function(e){
+                alert("error"+JSON.stringify(e));
+                console.info(JSON.stringify(e));
             }
         });
-    },*/
+    },gateway00 : function(){
+        var url = $("#url_gateway00").val();
+        $.ajax({
+            type: "GET",
+            url: url,
+            data:userInfo,
+            async:false,
+            dataType : "JSONP",
+            jsonp: "callbackparam",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+            jsonpCallback:"callbackFun",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+            success : function(res){
+                console.info(JSON.stringify(res));
+            },
+            error:function(e){
+                alert("error"+JSON.stringify(e));
+                console.info(JSON.stringify(e));
+            }
+        });
+    },
     /**
      * get
      * http://aaa.com:8080/test/gateway1?userId=000001&userName=zzz&userPwd=123456
@@ -87,10 +95,9 @@ var service = {
             type: "POST",
             url: url,
             data:"callback",
-            dataType: "jsonp",
-            JsonCallback:callbackFun,
+            dataType: "json",
             success : function(res){
-                alert("dddddddddd");
+                alert("success-----");
                 console.info(res);
                 console.info(JSON.stringify(res.jsonpresult));
             },
@@ -109,9 +116,10 @@ var service = {
         $.ajax({
             type: "POST",
             url: url,
-            data:"callback",
-            dataType: "jsonp",
-            JsonCallback:callbackFun,
+            data: params,
+            dataType: "JSONP",
+            jsonp: "callbackparam",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+            jsonpCallback:"callbackFun",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
             success : function(res){
                 alert("dddddddddd");
                 console.info(res);
@@ -133,8 +141,7 @@ var service = {
             type: "post",
             url: url,
             data:params,
-            //contentType: "application/json;charset=utf-8",
-            dataType : "text",
+            dataType : "jsonp",
             success : function(res){
                 console.info(JSON.stringify(res));
             }
@@ -150,7 +157,7 @@ var service = {
             url: url,
             data: params,
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-            dataType : "text",
+            dataType : "jsonp",
             success : function(res){
                 console.info(JSON.stringify(res));
             }
@@ -274,6 +281,5 @@ function testPost001(url){
 }
 
 function callbackFun(json){
-    alert(json);
     console.info(JSON.stringify(json));
 }

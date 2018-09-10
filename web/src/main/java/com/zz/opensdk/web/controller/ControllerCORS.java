@@ -11,60 +11,75 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.spi.http.HttpContext;
 import java.io.IOException;
 
 
 @Controller
 @RequestMapping("/cors")
-//@CrossOrigin
 public class ControllerCORS{
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerCORS.class);
 
     @RequestMapping(value = "/api0")
     @ResponseBody
-    @CrossOrigin
-    public String api0(UserInfo userInfo) {
+    public String api0(UserInfo userInfo,HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         LOGGER.info("userInfo="+JSON.toJSONString(userInfo));
         return JSON.toJSONString(userInfo);
     }
 
+    @RequestMapping(value = "/api00")
+    @ResponseBody
+    @CrossOrigin
+    public void api00(UserInfo userInfo,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        LOGGER.info("userInfo="+JSON.toJSONString(userInfo));
+        String jsonp = "[" + JSON.toJSONString(userInfo) +"]";
+        response.setContentType("text/plain");
+        //得到js函数名称
+        String callbackFunName = request.getParameter("callbackparam");
+
+        response.getWriter().write(callbackFunName+"(["+jsonp+"])");
+    }
+
+    /**
+     *  @CrossOrigin注解需要指定请求方式。get|post
+     * @param userInfo
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/api01",method = RequestMethod.POST)
+    @ResponseBody
+    @CrossOrigin
+    public String api01(UserInfo userInfo,HttpServletResponse response) {
+        LOGGER.info("userInfo="+JSON.toJSONString(userInfo));
+        String result = JSON.toJSONString(userInfo);
+        return result;
+    }
     /**
      * 返回json变成返回js了，所以服务器是要改动支持的，不是调用方一厢情愿说用就能用的。
      * 由于是动态内嵌script标签，那么肯定是不支持post方法了
-     * @param callback
      * @return
      */
     @RequestMapping(value = "/api1")
     @ResponseBody
-    public Object api1(String callback) {
+    public Object api1(HttpServletResponse response) {
+
         UserInfo userInfo = buildUserInfo();
+        response.setHeader("Access-Control-Allow-Origin", "*");
         LOGGER.info("userInfo="+JSON.toJSONString(userInfo));
-        String jsonp = "var jsonpresult = " + JSON.toJSONString(userInfo) +";";
-        return jsonp;
+        return JSON.toJSONString(userInfo);
     }
 
     @RequestMapping(value = "/api2")
     @ResponseBody
-    public Object api2(String callback) {
+    public Object api2(HttpServletRequest request,HttpServletResponse response) {
         UserInfo userInfo = buildUserInfo();
+        response.setHeader("Access-Control-Allow-Origin", "*");
         MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(userInfo);
-        mappingJacksonValue.setJsonpFunction(callback);
-        return mappingJacksonValue;
-    }
-
-
-    @RequestMapping("api3")
-    public void api3(HttpServletRequest request, HttpServletResponse response) {
-        int flag = 222;
-        response.setContentType("text/plain");
+        System.out.println("api2-----"+request.getParameter("callbackparam"));
+        mappingJacksonValue.setJsonpFunction(request.getParameter("callbackparam"));
         //得到js函数名称
-        String callbackFunName =request.getParameter("<span style=\"color:#ff6666;\">callbackparam</span>");
-        try {
-            //返回jsonp数据
-            response.getWriter().write(callbackFunName + "([ { flag:\""+flag+"\"}])");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return mappingJacksonValue;
     }
 
 

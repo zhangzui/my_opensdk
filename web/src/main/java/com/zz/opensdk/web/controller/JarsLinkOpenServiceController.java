@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author zhangzuizui
  */
 @Controller
-@RequestMapping("/open_api")
+@RequestMapping("/jarslink")
 public class JarsLinkOpenServiceController extends BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(JarsLinkOpenServiceController.class);
 
